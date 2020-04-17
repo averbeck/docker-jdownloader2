@@ -1,0 +1,23 @@
+version: "3.3"
+
+services:
+
+  jdownloader:
+
+    image: jdownloader2:latest
+
+    container_name: jdownloader
+
+    restart: unless-stopped
+
+    ports:
+      - "1080:8080/tcp"
+
+    volumes:
+      - "/tmp/jd2:/app"
+      - "/tmp/downloads:/downloads"
+
+    environment:
+      - HEIGHT="720"
+      - WIDTH="1280"
+      - TZ=Europe/Berlin
