@@ -1,0 +1,17 @@
+#!/bin/execlineb -P
+
+with-contenv
+
+define APP_DIR /app
+
+# Wait until openbox is running
+if { s6-svwait -t 10000 -U /var/run/s6/services/openbox/ }
+# Wait until guacamole is running
+if { s6-svwait -t 10000 -U /var/run/s6/services/guacamole/ }
+
+# Drop privileges and set env
+s6-setuidgid abc
+s6-env DISPLAY=:1 HOME=${APP_DIR}
+
+# Execute JDownloader2
+${APP_DIR}/JDownloader.sh
