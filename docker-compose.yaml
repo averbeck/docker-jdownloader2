@@ -4,7 +4,7 @@ services:
 
   jdownloader:
 
-    image: jdownloader2:latest
+    image: docker-jdownloader2:latest
 
     container_name: jdownloader
 
