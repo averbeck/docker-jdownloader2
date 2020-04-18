@@ -25,6 +25,9 @@ ENV HEIGHT=720
 # Choose java home from base image
 ENV JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
 
+# Define app directory
+ENV APP_HOME="/app"
+
 
 #########################################
 ##    REPOSITORIES AND DEPENDENCIES    ##

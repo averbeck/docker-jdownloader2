@@ -1,8 +1,8 @@
 #!/bin/execlineb -P
 
-with-contenv
+importas app_dir APP_HOME
 
-define APP_DIR /app
+with-contenv
 
 # Wait until openbox is running
 if { s6-svwait -t 10000 -U /var/run/s6/services/openbox/ }
@@ -11,7 +11,7 @@ if { s6-svwait -t 10000 -U /var/run/s6/services/guacamole/ }
 
 # Drop privileges and set env
 s6-setuidgid abc
-s6-env DISPLAY=:1 HOME=${APP_DIR}
+s6-env DISPLAY=:1 HOME=${app_dir}
 
 # Execute JDownloader2
-${APP_DIR}/JDownloader.sh
+/config/jd2/jd2launcher.sh
