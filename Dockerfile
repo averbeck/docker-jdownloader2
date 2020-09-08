@@ -23,7 +23,7 @@ ENV WIDTH=1280
 ENV HEIGHT=720
 
 # Choose java home from base image
-ENV JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
+ENV JAVA_HOME="/usr/lib/jvm/java-14-openjdk-amd64"
 
 # Define app directory
 ENV APP_HOME="/app"
@@ -35,14 +35,15 @@ ENV APP_HOME="/app"
 
 RUN \
     export DEBCONF_NONINTERACTIVE_SEEN=true DEBIAN_FRONTEND=noninteractive \
-# Install packages needed for app
- && echo 'deb http://archive.ubuntu.com/ubuntu bionic main universe restricted' > /etc/apt/sources.list \
- && echo 'deb http://archive.ubuntu.com/ubuntu bionic-updates main universe restricted' >> /etc/apt/sources.list \
+    # Install packages needed for app
+ && echo 'deb http://archive.ubuntu.com/ubuntu focal main universe restricted' > /etc/apt/sources.list \
+ && echo 'deb http://archive.ubuntu.com/ubuntu focal-updates main universe restricted' >> /etc/apt/sources.list \
  && apt-get update && apt-get install --no-install-recommends -y \
       firefox \
+      openjdk-14-jre \
       xz-utils \
  && rm -rf /var/lib/apt/lists/* \
- # Change RDP config name
+    # Change RDP config name
  && sed -i "s/\"myconfig\"/\"${APPNAME}\"/" /defaults/noauth-config.xml
 
 
