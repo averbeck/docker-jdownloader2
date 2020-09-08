@@ -2,24 +2,21 @@
 
 JDownloader2 docker container with a built-in browser based gui
 
-#### Install On unRaid:
 
-On unRaid, install from the Community Repositories and enter the app folder location and the port for the webUI.
+#### Install
 
-
-#### Install On Other Platforms (like Ubuntu or Synology 5.2 DSM, etc.):
-
-On other platforms, you can run this docker with the following command:
+You can run this docker with the following command:
 
 ```
 docker run -d \
   --name="JDownloader2" \
   -e HEIGHT="720" \
   -e WIDTH="1280" \
-  -v /path/to/config:/config:rw \
-  -v /etc/localtime:/etc/localtime:ro \
+  -e TZ=Europe/Berlin \
+  -v /path/to/jdownloader:/app:rw \
+  -v /path/to/downloads:/downloads:rw \
   -p XXXX:8080 \
-  aptalca/docker-jdownloader2
+  docker-jdownloader2
 ```
 
 #### Setup Instructions:
@@ -34,14 +31,26 @@ To access the GUI, point your web browser to http://SERVERIP:PORT/#/client/c/JDo
 
 JDownloader 2 also has a webserver accessible through my.jdownloader.org
 
-#### Changelog: 
+
+#### Environment Variables
+
+The dockergui image uses serveral optional enviromnet variable. All the ones listed in the example above plus the following:
+
+##### `TZ`
+This environment variable is used to set the timezone of the container.
+
+You can change the timezone to yours according to the list here: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+
+#### Changelog:
+- 2020-08-09 - Updated to OpenJDK 14 and focal sources. Fixed focus bug.
+- 2020-04-18 - Switched base image and made JDownloader install itself from .jar file on first run
 - 2016-06-08 - Added firefox for recaptcha through the webgui (See instructions above on settings)
 - 2016-01-08 - Fixed permissions for downloaded files. Should work better for samba shares.
 
+#### Build from docker file (Info only, not required.):
 
-##### Note:
-Some platforms like Debian are having issues with setting timezones. If you get the following error:
-`mv: cannot move '/etc/localtime.dpkg-new' to '/etc/localtime': Device or resource busy
-*** /etc/my_init.d/00_config.sh failed with status 1` and the container stops, remove the following from your run command: `-v /etc/localtime:/etc/localtime:ro` and replace it with the following: `-e TZ="America/New_York"`
-
-You can change the timezone to yours according to the list here: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+```
+git clone --depth=1 https://github.com/averbeck/docker-jdownloader2.git
+cd docker-jdownloader2
+docker build -t docker-jdownloader2:latest .
+```
