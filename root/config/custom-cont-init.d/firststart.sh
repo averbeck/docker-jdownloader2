@@ -18,5 +18,7 @@ fi
 chown -R ${PUID}:${PGID} /{${APP_HOME},downloads}
 chmod -R g+rw /{${APP_HOME},downloads}
 
+chmod +x /config/jd2/jd2launcher.sh
+
 # Remove script after first run
 rm -f /config/custom-cont-init.d/firststart.sh
