@@ -42,6 +42,7 @@ This environment variable is used to set the timezone of the container.
 You can change the timezone to yours according to the list here: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 #### Changelog:
+- 2021-02-01 - Updated to OpenJDK 15 and groovy sources.
 - 2020-08-09 - Updated to OpenJDK 14 and focal sources. Fixed focus bug.
 - 2020-04-18 - Switched base image and made JDownloader install itself from .jar file on first run
 - 2016-06-08 - Added firefox for recaptcha through the webgui (See instructions above on settings)
